@@ -232,13 +232,13 @@ body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;op
 @media(max-width:520px){.mus-t span.l{display:none}.mus-t{padding:0 15px;gap:0}}
 
 /* cover: the keepsake reel, then it settles into the page */
-#cover{display:none;position:fixed;inset:0;z-index:80;background:radial-gradient(circle at 50% 44%,#6a3a40,#52292E 62%,#3f1e22);color:var(--cream);flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(14px,3.2vh,30px);padding:max(24px,env(safe-area-inset-top,0px)) 20px 0;text-align:center;transition:opacity .9s ease .3s;overflow:hidden}
+#cover{display:none;position:fixed;inset:0;z-index:80;background:radial-gradient(circle at 50% 44%,#6a3a40,#52292E 62%,#3f1e22);color:var(--cream);flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(16px,3.6vh,38px);padding:max(clamp(20px,4vh,44px),env(safe-area-inset-top,0px)) 20px 0;text-align:center;transition:opacity .9s ease .3s;overflow:hidden}
 .cov #cover{display:flex}
-#cover .cv-top img{height:clamp(84px,14vh,128px);width:auto;margin:0 auto}
-#cover .cv-bot{display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2vh,18px);transition:opacity .35s,transform .5s}
-#cover .cv-tag{font-family:var(--hand);font-size:15.4px;color:var(--pink);line-height:1.4;margin:0}
-#cover .btn{height:29px;padding:0 16px;font-size:10.4px;box-shadow:0 6px 16px rgba(0,0,0,.25)}
-#cover .cv-hint{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:rgba(244,239,229,.6);display:flex;flex-direction:column;align-items:center;gap:6px;margin:0}
+#cover .cv-top img{height:clamp(96px,16vh,160px);width:auto;margin:0 auto}
+#cover .cv-bot{display:flex;flex-direction:column;align-items:center;gap:clamp(14px,3vh,28px);transition:opacity .35s,transform .5s}
+#cover .cv-tag{font-family:var(--hand);font-size:clamp(17px,2.8vh,26px);color:var(--pink);line-height:1.4;margin:0}
+#cover .btn{height:clamp(36px,5.2vh,48px);padding:0 clamp(20px,3vh,30px);font-size:clamp(13px,1.9vh,16px);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+#cover .cv-hint{font-size:clamp(11px,1.6vh,13px);letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:rgba(244,239,229,.6);display:flex;flex-direction:column;align-items:center;gap:6px;margin:0}
 #cover .cv-hint svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;animation:nudge 1.6s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 #cover .cv-top{transition:opacity .35s;margin-bottom:calc(-1*clamp(12px,3vh,28px))}
@@ -497,7 +497,7 @@ html.cov,html.cov body{overflow:hidden;height:100%}
   (function(){var root=document.documentElement;if(!root.classList.contains('cov'))return;
     var reelEl=$('#reel'),started=false,done=false;
     function lay(anim){reelEl.style.transition='none';reelEl.style.transform='none';var r=reelEl.getBoundingClientRect(),vw=window.innerWidth,vh=window.innerHeight,
-      S=Math.min(Math.max(vh*1.04,vw*.9),1600,vh*1.12),k=S/r.width,cx=vw/2,cy=vh-S*.04+vh*.05;
+      S=Math.min(Math.max(vh*1.04,vw*.9),1600,vh*1.12),k=S/r.width,cx=vw/2,cy=vh-S*.04+vh*.07;
       reelEl.style.transform='translate('+(cx-(r.left+r.width/2)).toFixed(1)+'px,'+(cy-(r.top+r.height/2)).toFixed(1)+'px) scale('+k.toFixed(4)+')'}
     function go(){if(started)return;started=true;
       reelEl.style.transition='transform 1.3s cubic-bezier(.6,0,.2,1)';void reelEl.offsetWidth;reelEl.style.transform='none';
