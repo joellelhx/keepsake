@@ -16,7 +16,8 @@ img{max-width:100%;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
 .w{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-h1,h2,h3{margin:0;font-family:var(--hand);font-weight:400;letter-spacing:0;line-height:1.35;text-wrap:balance}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+h2 em,h3 em{font-family:var(--hand);font-weight:400;font-style:normal;letter-spacing:0;line-height:1.4;font-size:.78em;color:var(--mauve)}
 p{margin:0}
 .eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mauve)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:27px;background:var(--burg);color:var(--cream);font-weight:600;font-size:16px;text-decoration:none;transition:transform .15s;box-shadow:0 10px 24px rgba(82,41,46,.28)}
@@ -78,7 +79,7 @@ nav.top .btn{height:42px;padding:0 20px;font-size:14px;box-shadow:none}
 
 section{padding:88px 0}
 .head{max-width:640px;margin-bottom:44px}
-.head h2{font-size:clamp(26px,3.6vw,44px);margin:12px 0 16px}
+.head h2{font-size:clamp(30px,4.4vw,52px);margin:12px 0 16px}
 .head p{font-size:18px;color:var(--muted);text-wrap:pretty}
 
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -115,7 +116,7 @@ section{padding:88px 0}
 .feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .feat + .feat{margin-top:88px}
 .feat.rev .txt{order:2}
-.feat .txt h3{font-size:clamp(24px,3vw,36px);margin:12px 0 18px}
+.feat .txt h3{font-size:clamp(28px,3.6vw,44px);margin:12px 0 18px}
 .feat .txt p{font-size:18px;color:var(--muted);max-width:28em;text-wrap:pretty}
 .pane{border-radius:40px;padding:36px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;min-height:440px;position:relative;overflow:hidden}
 @media(max-width:860px){.feat{grid-template-columns:1fr;gap:26px}.feat.rev .txt{order:0}.feat + .feat{margin-top:64px}.pane{min-height:400px}}
@@ -171,7 +172,8 @@ section{padding:88px 0}
 /* kip */
 .kipband{background:var(--burg);color:var(--cream);border-radius:44px 44px 0 0;padding:88px 0 0;overflow:hidden}
 .kipband .w{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.kipband h2{font-size:clamp(26px,3.8vw,44px);margin:12px 0 20px}
+.kipband h2{font-size:clamp(30px,4.4vw,52px);margin:12px 0 20px}
+.kipband h2 em,.cta-sec h2 em{color:var(--pink)}
 .kipband .eyebrow{color:var(--pink)}
 .kipband p{font-size:18px;color:#e6d3d0;max-width:27em;text-wrap:pretty}
 .kbig{display:flex;flex-direction:column;align-items:center;gap:0}
@@ -185,7 +187,7 @@ section{padding:88px 0}
 
 .cta-sec{text-align:center;padding:100px 0 96px;background:var(--burg);color:var(--cream)}
 .cta-sec img.mark{width:80px;margin:0 auto 22px}
-.cta-sec h2{font-size:clamp(28px,4.8vw,54px);margin-bottom:20px}
+.cta-sec h2{font-size:clamp(34px,5.6vw,64px);margin-bottom:20px}
 .cta-sec p{font-size:18px;color:#e6d3d0;max-width:30em;margin:0 auto 30px;text-wrap:pretty}
 .small{font-size:13px!important;color:#cdb2b0!important;margin:20px auto 0!important}
 footer{background:#3c1d21;color:#cdb2b0;font-size:13px;padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px))}
@@ -200,7 +202,7 @@ footer img{height:26px;width:auto}
 .mcard img{width:100%;border-radius:20px}
 .mx{position:absolute;right:26px;top:26px;width:40px;height:40px;border-radius:50%;background:rgba(250,246,236,.92);font-size:24px;line-height:1;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .mcard .meta{padding:16px 8px 0}
-.mcard h3{font-size:28px;margin:10px 0 12px}
+.mcard h3{font-family:var(--hand);font-weight:400;letter-spacing:0;line-height:1.35;font-size:28px;margin:10px 0 12px}
 .mcard .mpre{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:6px 12px;border-radius:14px;background:var(--c);color:var(--st)}
 .mcard p.s{font-size:17px;color:var(--muted);text-wrap:pretty}
 .mcard .row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
@@ -244,7 +246,7 @@ footer img{height:26px;width:auto}
 <div class="marq" aria-hidden="true"><div id="mq"></div></div>
 
 <section id="how" style="padding-bottom:40px"><div class="w">
-  <div class="head rv"><p class="eyebrow">Kip's tour</p><h2>Kip will show you around.</h2><p>Just like the first time you open the app. Tap Next and let him talk.</p></div>
+  <div class="head rv"><p class="eyebrow">Kip's tour</p><h2>Kip will show you <em>around.</em></h2><p>Just like the first time you open the app. Tap Next and let him talk.</p></div>
   <div class="tour rv" id="tour">
     <div class="tphone" id="tphone" aria-hidden="true"></div>
     <div class="tk">
@@ -260,21 +262,21 @@ footer img{height:26px;width:auto}
 <section id="features" style="padding-top:40px"><div class="w">
   <div class="walk sm" data-walk style="--sp:15s;--d:-4s;margin-bottom:34px"></div>
   <div class="feat rv">
-    <div class="txt"><p class="eyebrow">The memory card</p><h3>Seven little steps, one memory card.</h3><p>Pick a colour, say or type the story, choose a texture, pin the place, name the sense, choose how it felt. Kip weaves it all into a card, with a polaroid, a taped corner, and your own handwriting. Go back and change anything.</p></div>
+    <div class="txt"><p class="eyebrow">The memory card</p><h3>Seven little steps, <em>one memory card.</em></h3><p>Pick a colour, say or type the story, choose a texture, pin the place, name the sense, choose how it felt. Kip weaves it all into a card, with a polaroid, a taped corner, and your own handwriting. Go back and change anything.</p></div>
     <div class="pane tall" style="background:rgba(217,171,176,.5)"><div class="scr"><img src="assets/s_card.png" alt="A finished memory card in the app" loading="lazy"></div></div>
   </div>
   <div class="feat rev rv">
-    <div class="txt"><p class="eyebrow">Photos, videos, places</p><h3>Add a photo or a video. Pin the place.</h3><p>Type where you were and Kip drops a pin on the map. Or zoom in and tap the exact spot. Add pictures and short videos, and they sit right on the card, in the place they happened.</p></div>
+    <div class="txt"><p class="eyebrow">Photos, videos, places</p><h3>Add a photo or a video. <em>Pin the place.</em></h3><p>Type where you were and Kip drops a pin on the map. Or zoom in and tap the exact spot. Add pictures and short videos, and they sit right on the card, in the place they happened.</p></div>
     <div class="pane tall" style="background:rgba(171,175,153,.5)"><div class="scr"><img src="assets/s_place.png" alt="Pinning a place and adding pictures in the app" loading="lazy"></div></div>
   </div>
   <div class="feat rv">
-    <div class="txt"><p class="eyebrow">Music and sound</p><h3>Soft jazz, and a soundtrack for every memory.</h3><p>A little jazz plays while you keep things, with tiny sounds as you turn each page. Add a song to a memory like you would on a story: a title, an artist, and a link out to Spotify or YouTube Music. Memories can also play what they sound like. Tap one to hear it.</p>
+    <div class="txt"><p class="eyebrow">Music and sound</p><h3>Soft jazz, and a soundtrack for <em>every memory.</em></h3><p>A little jazz plays while you keep things, with tiny sounds as you turn each page. Add a song to a memory like you would on a story: a title, an artist, and a link out to Spotify or YouTube Music. Memories can also play what they sound like. Tap one to hear it.</p>
       <div class="pills" id="pills"></div><p class="soundnote" id="sn">Sounds are made live in your browser. Turn your volume up a little. In the app, the music starts on your first tap.</p></div>
     <div class="pane tall" style="background:rgba(118,131,148,.4)"><div class="scr"><img src="assets/s_story.png" alt="Telling a memory's story with sound in the app" loading="lazy"></div></div>
   </div>
   <div class="walk sm" data-walk style="--sp:11s;--d:-7s;margin:60px 0 10px"></div>
   <div class="feat rev rv">
-    <div class="txt"><p class="eyebrow">The shaker keychain</p><h3>Shake a memory loose.</h3><p>Tiny polaroids and stars rattle around inside a keychain charm. In the app you shake your phone, drag the charm or tap the button, and one of your memories falls out. Try it here.</p></div>
+    <div class="txt"><p class="eyebrow">The shaker keychain</p><h3>Shake a memory <em>loose.</em></h3><p>Tiny polaroids and stars rattle around inside a keychain charm. In the app you shake your phone, drag the charm or tap the button, and one of your memories falls out. Try it here.</p></div>
     <div class="pane" style="background:rgba(231,193,71,.42)">
       <button class="charm" id="charm" aria-label="Shake the keychain"><span class="in" id="charmIn"></span></button>
       <button class="btn" id="shkBtn" style="margin-top:6px">Shake it</button>
@@ -282,24 +284,24 @@ footer img{height:26px;width:auto}
     </div>
   </div>
   <div class="feat rv">
-    <div class="txt"><p class="eyebrow">The memory box</p><h3>A little pine box for the keepers.</h3><p>Flip the brass latch and the box opens toward you, onto a scrapbook calendar. Stick stickers where you like, move them around, take them off again. It is yours to fill.</p></div>
+    <div class="txt"><p class="eyebrow">The memory box</p><h3>A little pine box for <em>the keepers.</em></h3><p>Flip the brass latch and the box opens toward you, onto a scrapbook calendar. Stick stickers where you like, move them around, take them off again. It is yours to fill.</p></div>
     <div class="pane tall" style="background:rgba(148,98,101,.4)"><div class="scr"><img src="assets/s_box.png" alt="The memory box in the app" loading="lazy"></div></div>
   </div>
   <div class="feat rev rv">
-    <div class="txt"><p class="eyebrow">The memory reel</p><h3>Spin it. Stop on a page. Open it.</h3><p>Every memory lands on a wheel of numbered polaroids. Spin it, let it blur, and it settles on a picture. The pages are numbered in the order you kept them.</p></div>
+    <div class="txt"><p class="eyebrow">The memory reel</p><h3>Spin it. Stop on a page. <em>Open it.</em></h3><p>Every memory lands on a wheel of numbered polaroids. Spin it, let it blur, and it settles on a picture. The pages are numbered in the order you kept them.</p></div>
     <div class="pane tall" style="background:rgba(244,239,229,.9);box-shadow:0 0 0 1.5px var(--line) inset"><div class="scr"><img src="assets/s_wheel.png" alt="The memory reel in the app" loading="lazy"></div></div>
   </div>
 </div></section>
 
 <section id="senses" style="padding-top:0"><div class="w">
-  <div class="head rv"><p class="eyebrow">Seven senses</p><h2>What does it … like?</h2><p>Every memory starts with one of seven little sentences. Tap one to read it.</p></div>
+  <div class="head rv"><p class="eyebrow">Seven senses</p><h2>What does it … <em>like?</em></h2><p>Every memory starts with one of seven little sentences. Tap one to read it.</p></div>
   <div class="senses" id="senseGrid"></div>
 </div></section>
 
 <section id="kip" style="padding:0"><div class="kipband"><div class="w">
   <div>
     <p class="eyebrow">Meet Kip</p>
-    <h2>A snail who carries your memories.</h2>
+    <h2>A snail who carries <em>your memories.</em></h2>
     <p>Kip says hello when you open the app, asks how you are and why you’re here, and sits at the bottom of every page telling you what to do next. He leaves a dotted trail wherever he goes. Give him a tap.</p>
   </div>
   <div class="kbig"><div class="bubble" id="kbub" aria-live="polite">Hi! I’m Kip. I carry little memories on my back, the ones words can’t hold.</div><button class="kbtn" id="kbtn" aria-label="Tap Kip to hear him say something else"><img src="assets/kip.png" alt="Kip the snail"></button></div>
@@ -308,7 +310,7 @@ footer img{height:26px;width:auto}
 <div class="cta-sec" id="try"><div class="w">
   <div class="walk sm" data-walk style="--sp:12s;--d:-6s"></div>
   <img class="mark" src="assets/kmark_cream.png" alt="">
-  <h2>Come and keep something.</h2>
+  <h2>Come and <em>keep something.</em></h2>
   <p>Open Keepsake on your phone, say hello to Kip, and keep the first thing that comes to mind.</p>
   <a class="btn mus" href="app/">Try the app <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   <p class="small">Your memories are saved on your own device.</p>
