@@ -7,7 +7,8 @@
 <style>:root{color-scheme:light}html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Keepsake</title>
 <style>
-:root{--cream:#F4EFE5;--paper:#FAF6EC;--burg:#52292E;--mauve:#946265;--pink:#D9ABB0;--sage:#ABAF99;--mus:#E7C147;--slate:#768394;--ink:#352720;--muted:#6f5f55;--line:rgba(53,39,32,.14);color-scheme:light}
+@font-face{font-family:'Homemade Apple';src:url(assets/HomemadeApple.ttf) format('truetype');font-display:swap}
+:root{--hand:'Homemade Apple','Bradley Hand','Segoe Script',cursive;--cream:#F4EFE5;--paper:#FAF6EC;--burg:#52292E;--mauve:#946265;--pink:#D9ABB0;--sage:#ABAF99;--mus:#E7C147;--slate:#768394;--ink:#352720;--muted:#6f5f55;--line:rgba(53,39,32,.14);color-scheme:light}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -15,7 +16,7 @@ img{max-width:100%;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
 .w{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-h1,h2,h3{margin:0;letter-spacing:-.03em;line-height:1.05;text-wrap:balance}
+h1,h2,h3{margin:0;font-family:var(--hand);font-weight:400;letter-spacing:0;line-height:1.35;text-wrap:balance}
 p{margin:0}
 .eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mauve)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:27px;background:var(--burg);color:var(--cream);font-weight:600;font-size:16px;text-decoration:none;transition:transform .15s;box-shadow:0 10px 24px rgba(82,41,46,.28)}
@@ -36,7 +37,7 @@ nav.top .btn{height:42px;padding:0 20px;font-size:14px;box-shadow:none}
 /* hero */
 .hero{padding:44px 0 8px;overflow:hidden}
 .hero-in{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
-.hero h1{font-size:clamp(42px,6.4vw,88px);font-weight:800;margin:16px 0 20px}
+.hero h1{font-size:clamp(32px,4.7vw,64px);margin:16px 0 22px}
 .hero h1 em{font-style:normal;color:var(--mauve)}
 .lede{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:30em;text-wrap:pretty}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
@@ -55,18 +56,19 @@ nav.top .btn{height:42px;padding:0 20px;font-size:14px;box-shadow:none}
 .rcap{margin-top:22px;text-align:center;min-height:62px}
 .rcap small{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--mauve)}
 .rcap small i,.sdot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c,var(--mauve))}
-.rcap b{display:block;font-size:26px;letter-spacing:-.02em;margin-top:2px}
+.rcap b{display:block;font-family:var(--hand);font-weight:400;font-size:24px;margin-top:6px}
 .hint{font-size:13px;color:var(--muted);margin-top:6px}
 @media(max-width:960px){.hero{padding-top:24px}.hero-in{grid-template-columns:1fr;gap:28px}.reel-wrap{order:-1}.hero-txt{text-align:center;display:flex;flex-direction:column;align-items:center}.cta{justify-content:center}.reel{--s:min(500px,calc(100vw - 56px))}}
 
-.walk{position:relative;height:100px;--kw:96px;overflow:hidden;pointer-events:none;color:var(--sage)}
-.walk .trail{position:absolute;right:0;bottom:12px;height:30px;width:0;overflow:hidden;animation:trailw 10s linear infinite}
+.walk{position:relative;height:132px;--kw:124px;--sp:12s;--d:0s;overflow:hidden;pointer-events:none;color:var(--sage)}
+.walk.sm{height:104px;--kw:96px}
+.walk .trail{position:absolute;right:0;bottom:16px;height:30px;width:0;overflow:hidden;animation:trailw var(--sp) linear var(--d) infinite}
 .walk .trail svg{position:absolute;right:0;bottom:0}
-.walk .kw{position:absolute;bottom:0;right:0;width:var(--kw);animation:kipx 10s linear infinite}
-.walk .kw img{width:100%;animation:wob .6s ease-in-out infinite;transform-origin:50% 100%}
-@keyframes kipx{0%{right:0;opacity:0}6%{opacity:1}82%{right:calc(100% - var(--kw));opacity:1}92%,100%{right:calc(100% - var(--kw));opacity:0}}
-@keyframes trailw{0%{width:0;opacity:0}6%{opacity:1}82%{width:calc(100% - var(--kw));opacity:1}92%,100%{width:calc(100% - var(--kw));opacity:0}}
-@keyframes wob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) scaleY(.97) rotate(2deg)}}
+.walk .kw{position:absolute;bottom:0;right:0;width:var(--kw);animation:kipx var(--sp) linear var(--d) infinite}
+.walk .kw img{width:100%;animation:wob .7s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes kipx{0%{right:0;opacity:0}5%{opacity:1}84%{right:calc(100% - var(--kw));opacity:1}93%,100%{right:calc(100% - var(--kw));opacity:0}}
+@keyframes trailw{0%{width:0;opacity:0}5%{opacity:1}84%{width:calc(100% - var(--kw));opacity:1}93%,100%{width:calc(100% - var(--kw));opacity:0}}
+@keyframes wob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) scaleY(.97) rotate(2deg)}}
 
 .marq{background:var(--burg);color:var(--cream);overflow:hidden;padding:16px 0;white-space:nowrap}
 .marq div{display:inline-flex;animation:mq 40s linear infinite}
@@ -76,22 +78,44 @@ nav.top .btn{height:42px;padding:0 20px;font-size:14px;box-shadow:none}
 
 section{padding:88px 0}
 .head{max-width:640px;margin-bottom:44px}
-.head h2{font-size:clamp(32px,4.6vw,56px);font-weight:800;margin:12px 0 14px}
+.head h2{font-size:clamp(26px,3.6vw,44px);margin:12px 0 16px}
 .head p{font-size:18px;color:var(--muted);text-wrap:pretty}
 
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .step{background:var(--paper);border-radius:32px;padding:26px;box-shadow:0 0 0 1.5px var(--line) inset;display:flex;flex-direction:column;min-width:0}
 .step .n{width:34px;height:34px;border-radius:50%;background:var(--mus);color:#3a2a10;font-weight:800;display:grid;place-items:center;font-size:15px}
-.step h3{font-size:25px;margin:16px 0 8px;font-weight:700}
+.step h3{font-size:20px;margin:16px 0 8px}
 .step p{color:var(--muted);font-size:16px}
-.scr{margin:24px auto 0;width:min(240px,100%);border-radius:14% / 6.5%;overflow:hidden;box-shadow:0 18px 34px rgba(53,39,32,.28);background:#000}
-.scr img{width:100%;transform:scale(1.035)}
+.scr{margin:0 auto;width:min(250px,100%);filter:drop-shadow(0 18px 30px rgba(53,39,32,.32))}
+.scr img{width:100%}
 @media(max-width:760px){.steps{grid-template-columns:1fr}.scr{width:min(250px,70%)}}
+
+/* kip's tour */
+.tour{background:var(--burg);color:var(--cream);border-radius:44px;padding:44px 40px 36px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;align-items:center;position:relative;overflow:hidden}
+.tour::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 30%,rgba(217,171,176,.18),transparent 55%);pointer-events:none}
+.tphone{position:relative;width:min(300px,100%);aspect-ratio:600/1264;margin:0 auto;filter:drop-shadow(0 24px 40px rgba(0,0,0,.45))}
+.tphone img{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;transform:translateY(10px) scale(.985);transition:opacity .45s,transform .45s}
+.tphone img.on{opacity:1;transform:none}
+.tk{display:flex;flex-direction:column;align-items:center;gap:0;min-width:0;position:relative}
+.tstep{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mus);margin-bottom:16px;min-height:18px}
+.tk .bubble{width:min(440px,100%);min-height:132px;font-size:20px;margin-bottom:22px;align-items:flex-start;flex-direction:column;justify-content:center;gap:4px}
+.tk .bubble.pop{animation:pop .35s cubic-bezier(.2,.9,.3,1.3)}
+.tkip{width:min(180px,46%);transform-origin:50% 100%}
+.tkip.talking{animation:wob .5s ease-in-out infinite}
+.tdots{display:flex;gap:7px;margin:22px 0 18px;flex-wrap:wrap;justify-content:center}
+.tdots i{width:9px;height:9px;border-radius:50%;background:rgba(244,239,229,.28);transition:.25s}
+.tdots i.on{background:var(--mus);transform:scale(1.25)}
+.tnav{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.tnav .btn{height:50px;font-size:15px;padding:0 26px;box-shadow:none}
+.tnav .btn.cr{background:var(--cream);color:var(--burg)}
+.tnav .btn.gl{background:transparent;color:var(--cream);box-shadow:0 0 0 2px rgba(244,239,229,.5) inset}
+.tnav .btn[hidden]{display:none}
+@media(max-width:860px){.tour{grid-template-columns:1fr;padding:32px 18px 30px;gap:28px;border-radius:34px}.tphone{width:min(250px,64%)}.tk .bubble{min-height:150px}}
 
 .feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .feat + .feat{margin-top:88px}
 .feat.rev .txt{order:2}
-.feat .txt h3{font-size:clamp(30px,4vw,46px);font-weight:800;margin:12px 0 16px}
+.feat .txt h3{font-size:clamp(24px,3vw,36px);margin:12px 0 18px}
 .feat .txt p{font-size:18px;color:var(--muted);max-width:28em;text-wrap:pretty}
 .pane{border-radius:40px;padding:36px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;min-height:440px;position:relative;overflow:hidden}
 @media(max-width:860px){.feat{grid-template-columns:1fr;gap:26px}.feat.rev .txt{order:0}.feat + .feat{margin-top:64px}.pane{min-height:400px}}
@@ -110,7 +134,7 @@ section{padding:88px 0}
 .rcard{display:flex;gap:14px;align-items:center;background:var(--paper);border-radius:22px;padding:12px 16px 12px 12px;box-shadow:0 10px 24px rgba(53,39,32,.18);animation:pop .45s cubic-bezier(.2,.9,.3,1.3);text-align:left;width:100%}
 .rcard i{width:76px;height:76px;flex:none;background-size:cover;border-radius:8px;box-shadow:0 0 0 3px #fff,0 3px 8px rgba(0,0,0,.2)}
 .rcard small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--mauve);display:flex;align-items:center;gap:7px}
-.rcard b{display:block;font-size:20px;letter-spacing:-.02em;line-height:1.15;margin-top:2px}
+.rcard b{display:block;font-family:var(--hand);font-weight:400;font-size:17px;line-height:1.3;margin-top:4px}
 .rcard span{display:block;font-size:13px;color:var(--muted);margin-top:3px;line-height:1.35}
 @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
 
@@ -128,6 +152,8 @@ section{padding:88px 0}
 .soundnote{font-size:13px;color:var(--muted);margin-top:14px}
 .soundviz{width:100%;max-width:340px;display:grid;place-items:center;gap:16px}
 .soundviz .scr{width:min(230px,70%);margin:0}
+.pane .scr{width:min(260px,72%)}
+.pane.tall{padding:34px 20px}
 
 /* senses */
 .senses{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -136,16 +162,16 @@ section{padding:88px 0}
 .sense img{width:100%;border-radius:14px}
 .sense small{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
 .sense small i{width:10px;height:10px;border-radius:50%;background:rgb(var(--t))}
-.sense b{font-size:21px;letter-spacing:-.02em;margin-top:-6px}
+.sense b{font-family:var(--hand);font-weight:400;font-size:16px;line-height:1.35;margin-top:-2px}
 .sense.last{background:var(--burg);color:var(--cream);justify-content:center}
-.sense.last p{font-size:20px;font-weight:700;line-height:1.2;letter-spacing:-.02em}
+.sense.last p{font-family:var(--hand);font-size:19px;line-height:1.5}
 @media(max-width:960px){.senses{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.senses{gap:10px}.sense{padding:12px 12px 16px;border-radius:22px}.sense b{font-size:18px}}
+@media(max-width:480px){.senses{gap:10px}.sense{padding:12px 12px 16px;border-radius:22px}.sense b{font-size:12.5px}}
 
 /* kip */
 .kipband{background:var(--burg);color:var(--cream);border-radius:44px 44px 0 0;padding:88px 0 0;overflow:hidden}
 .kipband .w{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.kipband h2{font-size:clamp(34px,5vw,58px);font-weight:800;margin:12px 0 18px}
+.kipband h2{font-size:clamp(26px,3.8vw,44px);margin:12px 0 20px}
 .kipband .eyebrow{color:var(--pink)}
 .kipband p{font-size:18px;color:#e6d3d0;max-width:27em;text-wrap:pretty}
 .kbig{display:flex;flex-direction:column;align-items:center;gap:0}
@@ -154,11 +180,12 @@ section{padding:88px 0}
 .kbtn{display:block;width:min(320px,76%)}
 .kbtn img{width:100%;transition:transform .2s}.kbtn:active img{transform:scale(.95) rotate(-3deg)}
 .kipband .walk{margin-top:32px;color:var(--pink)}
+.cta-sec .walk{color:var(--pink);margin:-30px 0 40px}
 @media(max-width:860px){.kipband .w{grid-template-columns:1fr}}
 
 .cta-sec{text-align:center;padding:100px 0 96px;background:var(--burg);color:var(--cream)}
 .cta-sec img.mark{width:80px;margin:0 auto 22px}
-.cta-sec h2{font-size:clamp(36px,6vw,70px);font-weight:800;margin-bottom:16px}
+.cta-sec h2{font-size:clamp(28px,4.8vw,54px);margin-bottom:20px}
 .cta-sec p{font-size:18px;color:#e6d3d0;max-width:30em;margin:0 auto 30px;text-wrap:pretty}
 .small{font-size:13px!important;color:#cdb2b0!important;margin:20px auto 0!important}
 footer{background:#3c1d21;color:#cdb2b0;font-size:13px;padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px))}
@@ -173,7 +200,7 @@ footer img{height:26px;width:auto}
 .mcard img{width:100%;border-radius:20px}
 .mx{position:absolute;right:26px;top:26px;width:40px;height:40px;border-radius:50%;background:rgba(250,246,236,.92);font-size:24px;line-height:1;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .mcard .meta{padding:16px 8px 0}
-.mcard h3{font-size:34px;font-weight:800;margin:6px 0 10px}
+.mcard h3{font-size:28px;margin:10px 0 12px}
 .mcard .mpre{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:6px 12px;border-radius:14px;background:var(--c);color:var(--st)}
 .mcard p.s{font-size:17px;color:var(--muted);text-wrap:pretty}
 .mcard .row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
@@ -188,7 +215,7 @@ footer img{height:26px;width:auto}
 
 <nav class="top"><div class="w">
   <a href="#top" aria-label="Keepsake"><img src="assets/logo_burg.png" alt="Keepsake"></a>
-  <div class="links"><a href="#how">How it works</a><a href="#features">What's inside</a><a href="#senses">Seven senses</a><a href="#kip">Meet Kip</a></div>
+  <div class="links"><a href="#how">Kip's tour</a><a href="#features">What's inside</a><a href="#senses">Seven senses</a><a href="#kip">Meet Kip</a></div>
   <a class="btn" href="app/">Try the app</a>
 </div></nav>
 
@@ -197,8 +224,8 @@ footer img{height:26px;width:auto}
     <div class="hero-txt">
       <p class="eyebrow">A little memory app</p>
       <h1>Keep what words <em>can’t hold.</em></h1>
-      <p class="lede">Keepsake saves your memories by the sense that holds them. The smell of clean sheets, the crackle of a record, the taste of too-sour lemonade. Say it or type it, and it joins a reel that never stops turning.</p>
-      <div class="cta"><a class="btn" href="app/">Try the app <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="#how">See how it works</a></div>
+      <p class="lede">Keepsake keeps the smell of clean sheets, the crackle of a record, the taste of too-sour lemonade. Pick a colour and a texture, say it or type it, pin the place, add a photo, a video, a song. It all weaves into a memory card on a reel that never stops turning.</p>
+      <div class="cta"><a class="btn" href="app/">Try the app <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="#how">Take Kip's tour</a></div>
       <p class="by">Best on your phone. Your memories stay on your device.</p>
     </div>
     <div class="reel-wrap">
@@ -211,22 +238,42 @@ footer img{height:26px;width:auto}
       <p class="hint">Swipe or drag to spin it. Tap a memory to open it.</p>
     </div>
   </div>
-  <div class="w"><div class="walk" data-walk></div></div>
+  <div class="w"><div class="walk" data-walk style="--sp:13s"></div></div>
 </header>
 
 <div class="marq" aria-hidden="true"><div id="mq"></div></div>
 
-<section id="how"><div class="w">
-  <div class="head rv"><p class="eyebrow">How it works</p><h2>Three little steps.</h2><p>No accounts to set up and no blank page to stare at. Kip asks, you answer.</p></div>
-  <div class="steps">
-    <div class="step rv"><div class="n">1</div><h3>Pick a sense</h3><p>Smells like, sounds like, tastes like. Each sense has its own colour, so your memories sort themselves.</p><div class="scr"><img src="assets/app_record.png" alt="Record screen with sense chips" loading="lazy"></div></div>
-    <div class="step rv"><div class="n">2</div><h3>Say it, or type it</h3><p>Speak freely and the words are written down for you to edit. Add up to three pictures if you like.</p><div class="scr"><img src="assets/app_detail.png" alt="A saved memory" loading="lazy"></div></div>
-    <div class="step rv"><div class="n">3</div><h3>Spin the reel</h3><p>Every memory lands on a wheel of tiny polaroids. Drag it, flick it, tap one to open it.</p><div class="scr"><img src="assets/app_reel.png" alt="The memory reel" loading="lazy"></div></div>
+<section id="how" style="padding-bottom:40px"><div class="w">
+  <div class="head rv"><p class="eyebrow">Kip's tour</p><h2>Kip will show you around.</h2><p>Just like the first time you open the app. Tap Next and let him talk.</p></div>
+  <div class="tour rv" id="tour">
+    <div class="tphone" id="tphone" aria-hidden="true"></div>
+    <div class="tk">
+      <div class="tstep" id="tstep"></div>
+      <div class="bubble" id="tbub" aria-live="polite"></div>
+      <img class="tkip" id="tkip" src="assets/kip.png" alt="Kip the snail">
+      <div class="tdots" id="tdots"></div>
+      <div class="tnav"><button class="btn gl" id="tback" hidden>Back</button><button class="btn cr" id="tnext">Hello Kip</button><a class="btn mus" id="tgo" href="app/" hidden>Open Keepsake</a></div>
+    </div>
   </div>
 </div></section>
 
-<section id="features" style="padding-top:0"><div class="w">
+<section id="features" style="padding-top:40px"><div class="w">
+  <div class="walk sm" data-walk style="--sp:15s;--d:-4s;margin-bottom:34px"></div>
   <div class="feat rv">
+    <div class="txt"><p class="eyebrow">The memory card</p><h3>Seven little steps, one memory card.</h3><p>Pick a colour, say or type the story, choose a texture, pin the place, name the sense, choose how it felt. Kip weaves it all into a card, with a polaroid, a taped corner, and your own handwriting. Go back and change anything.</p></div>
+    <div class="pane tall" style="background:rgba(217,171,176,.5)"><div class="scr"><img src="assets/s_card.png" alt="A finished memory card in the app" loading="lazy"></div></div>
+  </div>
+  <div class="feat rev rv">
+    <div class="txt"><p class="eyebrow">Photos, videos, places</p><h3>Add a photo or a video. Pin the place.</h3><p>Type where you were and Kip drops a pin on the map. Or zoom in and tap the exact spot. Add pictures and short videos, and they sit right on the card, in the place they happened.</p></div>
+    <div class="pane tall" style="background:rgba(171,175,153,.5)"><div class="scr"><img src="assets/s_place.png" alt="Pinning a place and adding pictures in the app" loading="lazy"></div></div>
+  </div>
+  <div class="feat rv">
+    <div class="txt"><p class="eyebrow">Music and sound</p><h3>Soft jazz, and a soundtrack for every memory.</h3><p>A little jazz plays while you keep things, with tiny sounds as you turn each page. Add a song to a memory like you would on a story: a title, an artist, and a link out to Spotify or YouTube Music. Memories can also play what they sound like. Tap one to hear it.</p>
+      <div class="pills" id="pills"></div><p class="soundnote" id="sn">Sounds are made live in your browser. Turn your volume up a little. In the app, the music starts on your first tap.</p></div>
+    <div class="pane tall" style="background:rgba(118,131,148,.4)"><div class="scr"><img src="assets/s_story.png" alt="Telling a memory's story with sound in the app" loading="lazy"></div></div>
+  </div>
+  <div class="walk sm" data-walk style="--sp:11s;--d:-7s;margin:60px 0 10px"></div>
+  <div class="feat rev rv">
     <div class="txt"><p class="eyebrow">The shaker keychain</p><h3>Shake a memory loose.</h3><p>Tiny polaroids and stars rattle around inside a keychain charm. In the app you shake your phone, drag the charm or tap the button, and one of your memories falls out. Try it here.</p></div>
     <div class="pane" style="background:rgba(231,193,71,.42)">
       <button class="charm" id="charm" aria-label="Shake the keychain"><span class="in" id="charmIn"></span></button>
@@ -234,10 +281,13 @@ footer img{height:26px;width:auto}
       <div class="shkres" id="shkRes" aria-live="polite"></div>
     </div>
   </div>
+  <div class="feat rv">
+    <div class="txt"><p class="eyebrow">The memory box</p><h3>A little pine box for the keepers.</h3><p>Flip the brass latch and the box opens toward you, onto a scrapbook calendar. Stick stickers where you like, move them around, take them off again. It is yours to fill.</p></div>
+    <div class="pane tall" style="background:rgba(148,98,101,.4)"><div class="scr"><img src="assets/s_box.png" alt="The memory box in the app" loading="lazy"></div></div>
+  </div>
   <div class="feat rev rv">
-    <div class="txt"><p class="eyebrow">Sound</p><h3>Memories with their own soundtrack.</h3><p>Keepsake listens for clues in your words and plays what it hears: a blanket rustling, leaves, birds, rain. Tap one to hear it.</p>
-      <div class="pills" id="pills"></div><p class="soundnote" id="sn">Sounds are made live in your browser. Turn your volume up a little.</p></div>
-    <div class="pane" style="background:rgba(118,131,148,.36)"><div class="soundviz"><div class="scr"><img src="assets/app_detail.png" alt="A memory playing its sound in the app" loading="lazy"></div></div></div>
+    <div class="txt"><p class="eyebrow">The memory reel</p><h3>Spin it. Stop on a page. Open it.</h3><p>Every memory lands on a wheel of numbered polaroids. Spin it, let it blur, and it settles on a picture. The pages are numbered in the order you kept them.</p></div>
+    <div class="pane tall" style="background:rgba(244,239,229,.9);box-shadow:0 0 0 1.5px var(--line) inset"><div class="scr"><img src="assets/s_wheel.png" alt="The memory reel in the app" loading="lazy"></div></div>
   </div>
 </div></section>
 
@@ -250,15 +300,16 @@ footer img{height:26px;width:auto}
   <div>
     <p class="eyebrow">Meet Kip</p>
     <h2>A snail who carries your memories.</h2>
-    <p>Kip says hello when you open the app, asks how you are and why you’re here, and walks you through it. Along the way he leaves a dotted trail, the same dashes you’ll find on his antenna. Give him a tap.</p>
+    <p>Kip says hello when you open the app, asks how you are and why you’re here, and sits at the bottom of every page telling you what to do next. He leaves a dotted trail wherever he goes. Give him a tap.</p>
   </div>
   <div class="kbig"><div class="bubble" id="kbub" aria-live="polite">Hi! I’m Kip. I carry little memories on my back, the ones words can’t hold.</div><button class="kbtn" id="kbtn" aria-label="Tap Kip to hear him say something else"><img src="assets/kip.png" alt="Kip the snail"></button></div>
-</div><div class="w"><div class="walk" data-walk></div></div></div></section>
+</div><div class="w"><div class="walk" data-walk style="--sp:14s;--d:-3s"></div></div></div></section>
 
 <div class="cta-sec" id="try"><div class="w">
+  <div class="walk sm" data-walk style="--sp:12s;--d:-6s"></div>
   <img class="mark" src="assets/kmark_cream.png" alt="">
   <h2>Come and keep something.</h2>
-  <p>Open Keepsake on your phone, say hello to Kip, and save the first thing that comes to mind.</p>
+  <p>Open Keepsake on your phone, say hello to Kip, and keep the first thing that comes to mind.</p>
   <a class="btn mus" href="app/">Try the app <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   <p class="small">Your memories are saved on your own device.</p>
 </div></div>
@@ -289,8 +340,8 @@ footer img{height:26px;width:auto}
   var mq=$('#mq'),mh='';MEM.forEach(function(m){mh+='<span><b style="background:'+(m.pre==='remembers like'?'#F4EFE5':m.c)+'"></b>'+m.pre+'</span>'});mq.innerHTML=mh+mh+mh+mh;
 
   /* walking kip */
-  var P='M0 15';for(var j=0;j<40;j++)P+=(j?' t24 0':' q12 -8 24 0');
-  var wk='<div class="trail"><svg viewBox="0 0 960 30" width="960" height="30"><path d="'+P+'" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 8 1 8"/></svg></div><div class="kw"><img src="assets/kip.png" alt=""></div>';
+  var P='M0 15';for(var j=0;j<56;j++)P+=(j?' t24 0':' q12 -8 24 0');
+  var wk='<div class="trail"><svg viewBox="0 0 1344 30" width="1344" height="30"><path d="'+P+'" fill="none" stroke="currentColor" stroke-opacity=".85" stroke-width="2" stroke-linecap="round" stroke-dasharray="9 8 1 8"/></svg></div><div class="kw"><img src="assets/kip.png" alt=""></div>';
   [].forEach.call(document.querySelectorAll('[data-walk]'),function(e){e.innerHTML=wk});
 
   /* ===== sound engine (all synthesised) ===== */
@@ -364,11 +415,43 @@ footer img{height:26px;width:auto}
   charm.addEventListener('click',shake);$('#shkBtn').addEventListener('click',shake);
 
   /* ===== Kip talks ===== */
-  var KS=['Hi! I’m Kip. I carry little memories on my back, the ones words can’t hold.','How are you today?','What does today smell like?','Shake me and a memory falls out.','Pick a sense, say it or type it. I’ll write it down.','I leave a dotted trail wherever I go.'],ki=0;
+  var KS=['Hi! I’m Kip. I carry little memories on my back, the ones words can’t hold.','How are you today?','What does today smell like?','Where were you? Type a place and I’ll pin it.','Add a photo or a video, if you like.','Add a song and I’ll tuck it into your card.','Shake me and a memory falls out.','Your memory box is waiting.','I leave a dotted trail wherever I go.'],ki=0;
   function kipSay(){ki=(ki+1)%KS.length;var b=$('#kbub');b.style.opacity=0;setTimeout(function(){b.textContent=KS[ki];b.style.opacity=1},160)}
   $('#kbub').style.transition='opacity .16s';$('#kbtn').addEventListener('click',kipSay);
   var kt=setInterval(function(){if(!document.hidden)kipSay()},6500);
   $('#kbtn').addEventListener('click',function(){clearInterval(kt)});
+
+  /* ===== Kip's tour (mirrors the app's first-run intro) ===== */
+  var TS=[
+   {t:'Hello',say:['Hi! I’m Kip.','I carry little memories on my back, the ones words can’t hold.'],img:'s_home',next:'Hello Kip'},
+   {t:'Step 1 · Colour',say:['Tap the + and pick a colour.','What colour was this moment?'],img:'s_colour',next:'Next'},
+   {t:'Step 2 · The story',say:['Tell me about it.','Speak it, type it, or add a song.'],img:'s_story',next:'Next'},
+   {t:'Step 3 · Texture',say:['What did it feel like under your fingers?','Pick a texture.'],img:'s_texture',next:'Next'},
+   {t:'Step 4 · Place',say:['Where were you?','Type a place and I’ll pin it. Add a photo or a video too.'],img:'s_place',next:'Next'},
+   {t:'Step 5 · The sense',say:['Who or what was there?','Pick a sense, then name the thing itself.'],img:'s_sense',next:'Next'},
+   {t:'Step 6 · The feeling',say:['How did it make you feel?','Choose the one that fits best.'],img:'s_feel',next:'Next'},
+   {t:'Step 7 · Your card',say:['Now we weave it together.','Here’s your memory card. Go back to change anything.'],img:'s_card',next:'Next'},
+   {t:'The reel',say:['Spin the reel and stop on a page.','Then open it, or shake the keychain and let one fall out.'],img:'s_wheel',next:'Next'},
+   {t:'The memory box',say:['Keep the best ones in your memory box.','Flip the latch, and stick stickers where you like.'],img:'s_box',next:'Next'},
+   {t:'All set',say:['All set!','Shall we keep your first one?'],img:'s_home',next:null}];
+  var tI=0,tTy=0,tSeen=false,tb=$('#tbub'),tk=$('#tkip');
+  $('#tphone').innerHTML=TS.map(function(x){return x}).reduce(function(a,x){return a.indexOf(x.img)>-1?a:a.concat([x.img])},[]).map(function(n){return '<img data-n="'+n+'" src="assets/'+n+'.png" alt="" '+(n==='s_home'?'':'loading="lazy"')+'>'}).join('');
+  $('#tdots').innerHTML=TS.map(function(){return '<i></i>'}).join('');
+  function tSay(lines,k){clearTimeout(tTy);k=k||0;if(k===0)tb.innerHTML='';
+    if(k>=lines.length){tk.classList.remove('talking');return}
+    var p=document.createElement('span');tb.appendChild(p);var t=lines[k],i=0;
+    if(reduce){p.textContent=t;if(k+1<lines.length)tSay(lines,k+1);return}
+    tk.classList.add('talking');
+    (function ch(){i++;p.textContent=t.slice(0,i);if(i<t.length){tTy=setTimeout(ch,/[.,?!]$/.test(t.slice(0,i))?150:22)}else{tk.classList.remove('talking');if(k+1<lines.length)tTy=setTimeout(function(){tSay(lines,k+1)},650)}})()}
+  function tShow(n){tI=Math.max(0,Math.min(TS.length-1,n));var st=TS[tI];
+    [].forEach.call($('#tphone').children,function(im){im.classList.toggle('on',im.dataset.n===st.img)});
+    [].forEach.call($('#tdots').children,function(d,i){d.classList.toggle('on',i<=tI)});
+    $('#tstep').textContent=st.t;tb.classList.remove('pop');void tb.offsetWidth;tb.classList.add('pop');
+    $('#tback').hidden=tI===0;$('#tnext').hidden=!st.next;$('#tnext').textContent=st.next||'';$('#tgo').hidden=!!st.next;
+    tSay(st.say)}
+  $('#tnext').addEventListener('click',function(){tShow(tI+1)});$('#tback').addEventListener('click',function(){tShow(tI-1)});
+  $('#tour').addEventListener('keydown',function(e){if(e.key==='ArrowRight')tShow(tI+1);else if(e.key==='ArrowLeft')tShow(tI-1)});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es,o){if(es[0].isIntersecting&&!tSeen){tSeen=true;tShow(0);o.disconnect()}},{threshold:.35}).observe($('#tour'));else tShow(0);
 
   /* reveal on scroll */
   var els=document.querySelectorAll('.rv');
