@@ -231,12 +231,42 @@ body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;op
 .mus-t:not(.on) .eq b{opacity:.45}
 @media(max-width:520px){.mus-t span.l{display:none}.mus-t{padding:0 15px;gap:0}}
 
+/* cover: the keepsake reel, then it settles into the page */
+#cover{display:none;position:fixed;inset:0;z-index:80;background:radial-gradient(circle at 50% 44%,#6a3a40,#52292E 62%,#3f1e22);color:var(--cream);flex-direction:column;align-items:center;justify-content:space-between;padding:max(22px,env(safe-area-inset-top,0px)) 20px max(26px,env(safe-area-inset-bottom,0px));text-align:center;transition:opacity .9s ease .3s}
+.cov #cover{display:flex}
+#cover .cv-top img{height:34px;width:auto;margin:0 auto}
+#cover .cv-bot{display:flex;flex-direction:column;align-items:center;gap:18px;transition:opacity .35s,transform .5s}
+#cover .cv-tag{font-family:var(--hand);font-size:clamp(17px,2.4vw,24px);color:var(--pink);line-height:1.4;margin:0}
+#cover .cv-hint{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:rgba(244,239,229,.6);display:flex;flex-direction:column;align-items:center;gap:6px;margin:0}
+#cover .cv-hint svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+#cover .cv-top{transition:opacity .35s}
+.cov-go #cover{opacity:0}
+.cov-go #cover .cv-bot{opacity:0;transform:translateY(14px)}.cov-go #cover .cv-top{opacity:0}
+html.cov,html.cov body{overflow:hidden;height:100%}
+.cov .hero{overflow:visible}
+.cov .reel{z-index:90;pointer-events:none;will-change:transform}
+.cov .reel .disc{background:radial-gradient(circle at 50% 16%,#7a444b,#5e3036 72%);box-shadow:0 0 0 calc(var(--s)*.014) rgba(244,239,229,.3),0 30px 70px rgba(0,0,0,.4)}
+.cov:not(.cov-go) .hero-txt,.cov:not(.cov-go) .rcap,.cov:not(.cov-go) .hint,.cov:not(.cov-go) .reel-wrap .sk,.cov:not(.cov-go) .hero .sk{opacity:0}
+.hero-txt,.rcap,.hint,.reel-wrap .sk,.hero .sk{transition:opacity .9s ease .8s}
+.cov .mus-t{z-index:95}
+
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head><body>
+<script>(function(){try{history.scrollRestoration="manual"}catch(e){}var skip=location.hash||/skip/.test(location.search)||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);if(!skip){document.documentElement.classList.add("cov");window.scrollTo(0,0)}})()</script>
 
+
+<div id="cover" aria-label="Welcome to Keepsake">
+  <div class="cv-top"><img src="assets/logo_cream.png" alt="Keepsake"></div>
+  <div class="cv-bot">
+    <p class="cv-tag">for what words can’t hold</p>
+    <button class="btn mus" id="cvGo">Take a look</button>
+    <p class="cv-hint">or scroll down<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></p>
+  </div>
+</div>
 
 <nav class="top"><div class="w">
   <a href="#top" aria-label="Keepsake"><img src="assets/logo_burg.png" alt="Keepsake"></a>
@@ -461,6 +491,26 @@ body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;op
   reel.addEventListener('keydown',function(e){var t=e.target.closest('.tile');if(t&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openMem(+t.dataset.i)}});
   if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting},{threshold:0}).observe(reel);
   requestAnimationFrame(frame);
+
+  /* ===== cover: big reel settles into the page ===== */
+  (function(){var root=document.documentElement;if(!root.classList.contains('cov'))return;
+    var reelEl=$('#reel'),started=false;
+    function lay(anim){reelEl.style.transition='none';reelEl.style.transform='none';var r=reelEl.getBoundingClientRect(),vw=window.innerWidth,vh=window.innerHeight,
+      S=Math.min(vw*.84,vh*.5,560),k=S/r.width,cx=vw/2,cy=vh*.45;
+      reelEl.style.transform='translate('+(cx-(r.left+r.width/2)).toFixed(1)+'px,'+(cy-(r.top+r.height/2)).toFixed(1)+'px) scale('+k.toFixed(4)+')'}
+    function go(){if(started)return;started=true;
+      reelEl.style.transition='transform 1.3s cubic-bezier(.6,0,.2,1)';void reelEl.offsetWidth;reelEl.style.transform='none';
+      root.classList.add('cov-go');
+      setTimeout(function(){root.classList.remove('cov');root.classList.remove('cov-go');reelEl.style.transition='';reelEl.style.transform='';window.scrollTo(0,0);removeEventListener('resize',onR)},1500)}
+    function onR(){if(!started)lay()}
+    lay();window.addEventListener('resize',onR);
+    window.addEventListener('load',function(){if(!started)lay()});
+    $('#cvGo').addEventListener('click',go);
+    window.addEventListener('wheel',function(e){if(e.deltaY>6)go();e.preventDefault()},{passive:false});
+    var ty=null;window.addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+    window.addEventListener('touchmove',function(e){if(ty!==null&&ty-e.touches[0].clientY>28)go();e.preventDefault()},{passive:false});
+    window.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '||e.key==='Enter'){if(e.target.closest&&e.target.closest('#musT'))return;e.preventDefault();go()}});
+  })();
 
   /* ===== shaker ===== */
   var cin=$('#charmIn'),ch='';[[1,8,'-8deg',3],[2,56,'7deg',4],[3,104,'-3deg',6]].forEach(function(a){ch+='<i style="left:'+a[1]+'px;--r:'+a[2]+';transform:rotate('+a[2]+');background-image:url(assets/thumb_'+a[0]+'.png);animation-delay:'+(a[3]*.012)+'s"></i>'});
