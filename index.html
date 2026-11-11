@@ -208,6 +208,20 @@ footer img{height:26px;width:auto}
 .mcard .row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
 .mcard .row .btn{height:46px;padding:0 22px;font-size:15px;flex:1}
 
+/* homey bits: stickers, tape, paper grain */
+body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .36  0 0 0 0 .3  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.sk{position:absolute;width:var(--w,72px);transform:rotate(var(--r,0deg));pointer-events:none;z-index:3;filter:drop-shadow(0 3px 5px rgba(53,39,32,.28))}
+.sk img{width:100%}
+.pane::before,.sense:not(.last)::before{content:"";position:absolute;left:50%;top:-9px;width:78px;height:24px;margin-left:-39px;background:rgba(217,171,176,.78);transform:rotate(-3deg);z-index:4;box-shadow:0 1px 2px rgba(53,39,32,.15);clip-path:polygon(2% 0,98% 6%,100% 40%,97% 100%,3% 94%,0 55%)}
+.feat.rev .pane::before{background:rgba(231,193,71,.7);transform:rotate(3deg)}
+.sense:not(.last){position:relative}
+.sense:not(.last)::before{width:54px;height:18px;margin-left:-27px;top:-7px;background:rgba(231,193,71,.65)}
+.sense:nth-child(even):not(.last)::before{background:rgba(171,175,153,.8);transform:rotate(4deg)}
+.sense:nth-child(3n+1){transform:rotate(-.8deg)}.sense:nth-child(3n+2){transform:rotate(.7deg)}
+.sense:hover{transform:translateY(-4px) rotate(0deg)!important}
+.hero-in{position:relative}
+@media(max-width:860px){.sk.hide-s{display:none}.sk{--w:56px}}
+
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
@@ -223,14 +237,15 @@ footer img{height:26px;width:auto}
 
 <header class="hero" id="top">
   <div class="w hero-in">
-    <div class="hero-txt">
+    <div class="hero-txt" style="position:relative">
+      <span class="sk hide-s" style="--w:62px;--r:14deg;right:6%;top:-6px" aria-hidden="true"><img src="assets/stk_2.webp" alt=""></span>
       <p class="eyebrow">A little memory app</p>
       <h1>Keep what words <em>can’t hold.</em></h1>
       <p class="lede">Keepsake keeps the smell of clean sheets, the crackle of a record, the taste of too-sour lemonade. Pick a colour and a texture, say it or type it, pin the place, add a photo, a video, a song. It all weaves into a memory card on a reel that never stops turning.</p>
       <div class="cta"><a class="btn" href="app/">Try the app <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="#how">Take Kip's tour</a></div>
       <p class="by">Best on your phone. Your memories stay on your device.</p>
     </div>
-    <div class="reel-wrap">
+    <div class="reel-wrap" style="position:relative">
       <div class="reel" id="reel" role="group" aria-label="Spinning memory reel. Swipe sideways to spin it, tap a memory to open it.">
         <div class="disc" id="disc"></div>
         <div class="pin"></div>
@@ -238,6 +253,7 @@ footer img{height:26px;width:auto}
       </div>
       <div class="rcap" id="rcap" aria-live="polite"></div>
       <p class="hint">Swipe or drag to spin it. Tap a memory to open it.</p>
+      <span class="sk" style="--w:92px;--r:-9deg;left:-8px;top:8%" aria-hidden="true"><img src="assets/stk_1.webp" alt=""></span>
     </div>
   </div>
   <div class="w"><div class="walk" data-walk style="--sp:13s"></div></div>
@@ -248,6 +264,7 @@ footer img{height:26px;width:auto}
 <section id="how" style="padding-bottom:40px"><div class="w">
   <div class="head rv"><p class="eyebrow">Kip's tour</p><h2>Kip will show you <em>around.</em></h2><p>Just like the first time you open the app. Tap Next and let him talk.</p></div>
   <div class="tour rv" id="tour">
+    <span class="sk" style="--w:78px;--r:8deg;right:22px;top:16px" aria-hidden="true"><img src="assets/stk_3.webp" alt=""></span>
     <div class="tphone" id="tphone" aria-hidden="true"></div>
     <div class="tk">
       <div class="tstep" id="tstep"></div>
@@ -263,7 +280,7 @@ footer img{height:26px;width:auto}
   <div class="walk sm" data-walk style="--sp:15s;--d:-4s;margin-bottom:34px"></div>
   <div class="feat rv">
     <div class="txt"><p class="eyebrow">The memory card</p><h3>Seven little steps, <em>one memory card.</em></h3><p>Pick a colour, say or type the story, choose a texture, pin the place, name the sense, choose how it felt. Kip weaves it all into a card, with a polaroid, a taped corner, and your own handwriting. Go back and change anything.</p></div>
-    <div class="pane tall" style="background:rgba(217,171,176,.5)"><div class="scr"><img src="assets/s_card.png" alt="A finished memory card in the app" loading="lazy"></div></div>
+    <div class="pane tall" style="background:rgba(217,171,176,.5)"><div class="scr"><img src="assets/s_card.png" alt="A finished memory card in the app" loading="lazy"></div><span class="sk" style="--w:66px;--r:-12deg;left:14px;bottom:18px" aria-hidden="true"><img src="assets/stk_2.webp" alt=""></span></div>
   </div>
   <div class="feat rev rv">
     <div class="txt"><p class="eyebrow">Photos, videos, places</p><h3>Add a photo or a video. <em>Pin the place.</em></h3><p>Type where you were and Kip drops a pin on the map. Or zoom in and tap the exact spot. Add pictures and short videos, and they sit right on the card, in the place they happened.</p></div>
@@ -272,7 +289,7 @@ footer img{height:26px;width:auto}
   <div class="feat rv">
     <div class="txt"><p class="eyebrow">Music and sound</p><h3>Soft jazz, and a soundtrack for <em>every memory.</em></h3><p>A little jazz plays while you keep things, with tiny sounds as you turn each page. Add a song to a memory like you would on a story: a title, an artist, and a link out to Spotify or YouTube Music. Memories can also play what they sound like. Tap one to hear it.</p>
       <div class="pills" id="pills"></div><p class="soundnote" id="sn">Sounds are made live in your browser. Turn your volume up a little. In the app, the music starts on your first tap.</p></div>
-    <div class="pane tall" style="background:rgba(118,131,148,.4)"><div class="scr"><img src="assets/s_story.png" alt="Telling a memory's story with sound in the app" loading="lazy"></div></div>
+    <div class="pane tall" style="background:rgba(118,131,148,.4)"><div class="scr"><img src="assets/s_story.png" alt="Telling a memory's story with sound in the app" loading="lazy"></div><span class="sk" style="--w:70px;--r:7deg;right:18px;top:26px" aria-hidden="true"><img src="assets/stk_3.webp" alt=""></span></div>
   </div>
   <div class="walk sm" data-walk style="--sp:11s;--d:-7s;margin:60px 0 10px"></div>
   <div class="feat rev rv">
@@ -285,7 +302,7 @@ footer img{height:26px;width:auto}
   </div>
   <div class="feat rv">
     <div class="txt"><p class="eyebrow">The memory box</p><h3>A little pine box for <em>the keepers.</em></h3><p>Flip the brass latch and the box opens toward you, onto a scrapbook calendar. Stick stickers where you like, move them around, take them off again. It is yours to fill.</p></div>
-    <div class="pane tall" style="background:rgba(148,98,101,.4)"><div class="scr"><img src="assets/s_box.png" alt="The memory box in the app" loading="lazy"></div></div>
+    <div class="pane tall" style="background:rgba(148,98,101,.4)"><div class="scr"><img src="assets/s_box.png" alt="The memory box in the app" loading="lazy"></div><span class="sk" style="--w:84px;--r:10deg;right:16px;bottom:20px" aria-hidden="true"><img src="assets/stk_1.webp" alt=""></span></div>
   </div>
   <div class="feat rev rv">
     <div class="txt"><p class="eyebrow">The memory reel</p><h3>Spin it. Stop on a page. <em>Open it.</em></h3><p>Every memory lands on a wheel of numbered polaroids. Spin it, let it blur, and it settles on a picture. The pages are numbered in the order you kept them.</p></div>
@@ -307,7 +324,8 @@ footer img{height:26px;width:auto}
   <div class="kbig"><div class="bubble" id="kbub" aria-live="polite">Hi! I’m Kip. I carry little memories on my back, the ones words can’t hold.</div><button class="kbtn" id="kbtn" aria-label="Tap Kip to hear him say something else"><img src="assets/kip.png" alt="Kip the snail"></button></div>
 </div><div class="w"><div class="walk" data-walk style="--sp:14s;--d:-3s"></div></div></div></section>
 
-<div class="cta-sec" id="try"><div class="w">
+<div class="cta-sec" id="try"><div class="w" style="position:relative">
+  <span class="sk hide-s" style="--w:84px;--r:-10deg;left:4%;top:20px" aria-hidden="true"><img src="assets/stk_1.webp" alt=""></span><span class="sk hide-s" style="--w:60px;--r:12deg;right:6%;top:36px" aria-hidden="true"><img src="assets/stk_2.webp" alt=""></span>
   <img class="mark" src="assets/kmark_cream.png" alt="">
   <h2>Come and <em>keep something.</em></h2>
   <p>Open Keepsake on your phone, say hello to Kip, and keep the first thing that comes to mind.</p>
