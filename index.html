@@ -494,22 +494,22 @@ html.cov,html.cov body{overflow:hidden;height:100%}
 
   /* ===== cover: big reel settles into the page ===== */
   (function(){var root=document.documentElement;if(!root.classList.contains('cov'))return;
-    var reelEl=$('#reel'),started=false;
+    var reelEl=$('#reel'),started=false,done=false;
     function lay(anim){reelEl.style.transition='none';reelEl.style.transform='none';var r=reelEl.getBoundingClientRect(),vw=window.innerWidth,vh=window.innerHeight,
       S=Math.min(vw*.84,vh*.5,560),k=S/r.width,cx=vw/2,cy=vh*.45;
       reelEl.style.transform='translate('+(cx-(r.left+r.width/2)).toFixed(1)+'px,'+(cy-(r.top+r.height/2)).toFixed(1)+'px) scale('+k.toFixed(4)+')'}
     function go(){if(started)return;started=true;
       reelEl.style.transition='transform 1.3s cubic-bezier(.6,0,.2,1)';void reelEl.offsetWidth;reelEl.style.transform='none';
       root.classList.add('cov-go');
-      setTimeout(function(){root.classList.remove('cov');root.classList.remove('cov-go');reelEl.style.transition='';reelEl.style.transform='';window.scrollTo(0,0);removeEventListener('resize',onR)},1500)}
+      setTimeout(function(){root.classList.remove('cov');root.classList.remove('cov-go');reelEl.style.transition='';reelEl.style.transform='';window.scrollTo(0,0);done=true;removeEventListener('resize',onR)},1500)}
     function onR(){if(!started)lay()}
     lay();window.addEventListener('resize',onR);
     window.addEventListener('load',function(){if(!started)lay()});
     $('#cvGo').addEventListener('click',go);
-    window.addEventListener('wheel',function(e){if(e.deltaY>6)go();e.preventDefault()},{passive:false});
+    window.addEventListener('wheel',function(e){if(done)return;if(e.deltaY>6)go();e.preventDefault()},{passive:false});
     var ty=null;window.addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
-    window.addEventListener('touchmove',function(e){if(ty!==null&&ty-e.touches[0].clientY>28)go();e.preventDefault()},{passive:false});
-    window.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '||e.key==='Enter'){if(e.target.closest&&e.target.closest('#musT'))return;e.preventDefault();go()}});
+    window.addEventListener('touchmove',function(e){if(done)return;if(ty!==null&&ty-e.touches[0].clientY>28)go();e.preventDefault()},{passive:false});
+    window.addEventListener('keydown',function(e){if(done)return;if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '||e.key==='Enter'){if(e.target.closest&&e.target.closest('#musT'))return;e.preventDefault();go()}});
   })();
 
   /* ===== shaker ===== */
