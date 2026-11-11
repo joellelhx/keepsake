@@ -222,6 +222,15 @@ body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;op
 .hero-in{position:relative}
 @media(max-width:860px){.sk.hide-s{display:none}.sk{--w:56px}}
 
+/* music toggle */
+.mus-t{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:60;display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 18px 0 14px;border-radius:23px;background:var(--cream);color:var(--burg);font-size:14px;font-weight:600;box-shadow:0 0 0 2px var(--burg) inset,0 10px 24px rgba(53,39,32,.25);transition:transform .2s}
+.mus-t:active{transform:scale(.95)}
+.mus-t .eq{display:flex;gap:2px;align-items:flex-end;height:16px}
+.mus-t .eq b{width:3px;height:4px;border-radius:2px;background:currentColor}
+.mus-t.on .eq b{animation:eqb .9s ease-in-out infinite}.mus-t.on .eq b:nth-child(2){animation-delay:.25s}.mus-t.on .eq b:nth-child(3){animation-delay:.5s}
+.mus-t:not(.on) .eq b{opacity:.45}
+@media(max-width:520px){.mus-t span.l{display:none}.mus-t{padding:0 15px;gap:0}}
+
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
@@ -333,6 +342,8 @@ body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;op
   <p class="small">Your memories are saved on your own device.</p>
 </div></div>
 
+<button class="mus-t" id="musT" aria-pressed="false" aria-label="Soft jazz: tap to play"><span class="eq"><b></b><b></b><b></b></span><span class="l" id="musL">Tap for soft jazz</span></button>
+
 <footer><div class="w"><img src="assets/logo_cream.png" alt="Keepsake"><span>A DVB303 brand project by Joelle Lim · QUT Visual Communication · End of Year Exhibition, 11 Nov 2026</span></div></footer>
 
 <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mT"><div class="mcard" id="mcard">
@@ -390,6 +401,33 @@ body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;op
   function syncSnd(){[].forEach.call(document.querySelectorAll('.pill'),function(b){var on=SND.on&&SND.key===b.dataset.k;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});var h=$('#mHear');if(h&&!h.hidden)h.textContent=(SND.on&&SND.key===h.dataset.k)?'Stop sound':'Hear it'}
   pills.addEventListener('click',function(e){var b=e.target.closest('.pill');if(!b)return;var k=b.dataset.k;if(SND.on&&SND.key===k){stopSnd();return}if(!playSnd(k))$('#sn').textContent='Sound is not available in this browser.'});
   document.addEventListener('visibilitychange',function(){if(document.hidden)stopSnd()});
+
+  /* ===== soft jazz (same little engine as the app) ===== */
+  var JX=null,JZ={on:false,g:null,dry:null,rev:null,timer:null,t:0,e:0,bar:0},musOK=true;
+  try{musOK=localStorage.getItem('keepsake.web.music')!=='off'}catch(e){}
+  var JCH=[{b:38,c:[53,57,60,64,67],s:[62,65,67,69,72]},{b:43,c:[53,59,62,64],s:[62,64,67,69,71]},{b:36,c:[52,55,59,62],s:[64,67,71,72,74]},{b:45,c:[55,61,64,65],s:[64,65,69,72,73]}];
+  function mtof(m){return 440*Math.pow(2,(m-69)/12)}
+  function jzInit(x){if(JZ.g)return;JZ.g=x.createGain();JZ.g.gain.value=0;JZ.dry=x.createGain();JZ.dry.gain.value=.75;var cv=x.createConvolver(),n=Math.floor(x.sampleRate*1.8),b=x.createBuffer(2,n,x.sampleRate);for(var c=0;c<2;c++){var d=b.getChannelData(c);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2.6)}cv.buffer=b;JZ.rev=x.createGain();JZ.rev.gain.value=.4;JZ.dry.connect(JZ.g);JZ.rev.connect(cv);cv.connect(JZ.g);JZ.g.connect(x.destination)}
+  function jzNote(x,t,f,dur,vol,type){var o=x.createOscillator(),o2=x.createOscillator(),g=x.createGain(),lp=x.createBiquadFilter(),g2=x.createGain();o.type=type||'sine';o2.type='triangle';o.frequency.value=f;o2.frequency.value=f*2.003;g2.gain.value=.22;lp.type='lowpass';lp.frequency.value=type==='triangle'?520:2400;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.012);g.gain.exponentialRampToValueAtTime(.0008,t+dur);o.connect(g);o2.connect(g2);g2.connect(g);g.connect(lp);lp.connect(JZ.dry);if(type!=='triangle')lp.connect(JZ.rev);o.start(t);o2.start(t);o.stop(t+dur+.05);o2.stop(t+dur+.05)}
+  function jzBrush(x,t,vol,hp){var n=Math.floor(x.sampleRate*.07),b=x.createBuffer(1,n,x.sampleRate),d=b.getChannelData(0);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,1.5);var s=x.createBufferSource();s.buffer=b;var f=x.createBiquadFilter();f.type='highpass';f.frequency.value=hp||6500;var g=x.createGain();g.gain.value=vol;s.connect(f);f.connect(g);g.connect(JZ.dry);s.start(t)}
+  function jzStep(x,t,e,bar){var ch=JCH[Math.floor(bar/2)%4],nx=JCH[(Math.floor(bar/2)+(bar%2?1:0))%4],q=e%2===0,beat=e>>1;
+    if(q){var bn=[ch.b,ch.b+4,ch.b+7,nx.b+(nx.b>ch.b?-1:1)][beat];if(beat===0)bn=ch.b;jzNote(x,t,mtof(bn),.8,.2,'triangle');jzBrush(x,t,beat%2?.03:.018,beat%2?3500:6500)}else jzBrush(x,t,.016,7000);
+    if((e===0&&Math.random()<.7)||(e===3&&Math.random()<.6)||(e===6&&Math.random()<.3)){var inv=Math.random()<.5?0:-12;ch.c.forEach(function(m,i){jzNote(x,t+i*.012,mtof(m+inv+12*(m<54?1:0)),1.5,.034,'sine')})}
+    if(Math.random()<.2){var m2=ch.s[Math.floor(Math.random()*ch.s.length)];jzNote(x,t,mtof(m2+12),.9,.03,'sine')}}
+  function jzTick(){var x=JX;if(!x||!JZ.on)return;var eighth=60/74/2;
+    while(JZ.t<x.currentTime+.25){var sw=(JZ.e%2)?eighth*.24:0;jzStep(x,JZ.t+sw,JZ.e,JZ.bar);JZ.t+=eighth;JZ.e++;if(JZ.e>=8){JZ.e=0;JZ.bar=(JZ.bar+1)%8}}
+    var duck=1;if(SND.on)duck=.15;if(document.hidden)duck=0;JZ.g.gain.setTargetAtTime(.17*duck,x.currentTime,.4)}
+  function musUI(){var b=$('#musT'),on=JZ.on;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.setAttribute('aria-label',on?'Soft jazz is playing: tap to pause':'Soft jazz: tap to play');$('#musL').textContent=on?'Soft jazz':(musOK?'Tap for soft jazz':'Jazz paused')}
+  function jazzStart(){if(JZ.on)return true;try{if(!JX){var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return false;JX=new AC()}if(JX.state==='suspended'&&JX.resume)JX.resume()}catch(e){return false}
+    jzInit(JX);JZ.on=true;JZ.t=JX.currentTime+.1;JZ.e=0;JZ.bar=0;JZ.g.gain.cancelScheduledValues(JX.currentTime);JZ.g.gain.setValueAtTime(0,JX.currentTime);clearInterval(JZ.timer);JZ.timer=setInterval(jzTick,60);jzTick();musUI();return true}
+  function jazzStop(){if(!JZ.on)return;JZ.on=false;clearInterval(JZ.timer);try{JZ.g.gain.setTargetAtTime(0,JX.currentTime,.25)}catch(e){}musUI()}
+  function saveMus(){try{localStorage.setItem('keepsake.web.music',musOK?'on':'off')}catch(e){}}
+  $('#musT').addEventListener('click',function(e){e.stopPropagation();if(JZ.on){musOK=false;jazzStop()}else{musOK=true;jazzStart()}saveMus();musUI()});
+  var kickEv=['pointerdown','touchend','keydown'];
+  function kick(e){if(!musOK)return;if(e&&e.target&&e.target.closest&&e.target.closest('#musT'))return;if(jazzStart())kickEv.forEach(function(n){document.removeEventListener(n,kick,true)})}
+  kickEv.forEach(function(n){document.addEventListener(n,kick,true)});
+  document.addEventListener('visibilitychange',function(){if(!JZ.on)return;try{if(document.hidden)JZ.g.gain.setTargetAtTime(0,JX.currentTime,.1);else jzTick()}catch(e){}});
+  musUI();
 
   /* ===== modal ===== */
   var mi=0,lastFocus=null,modal=$('#modal');
